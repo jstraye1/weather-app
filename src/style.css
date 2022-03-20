@@ -1,0 +1,131 @@
+body {
+  margin-top: 30px;
+}
+input.city {
+  text-transform: capitalize;
+}
+.weather-app-container {
+  max-width: 730px;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+.card {
+  border: 2px solid #aaa;
+}
+.current-row {
+  margin: 0 20px;
+}
+.city-entry {
+  border: 1px solid #aaa;
+}
+.current-city {
+  font-size: 50px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 8px;
+}
+.current-date {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 18px;
+  font-weight: 400;
+}
+.current-temp {
+  color: #000;
+  font-size: 60px;
+  font-weight: 500;
+  padding: 5px;
+  margin-left: 50px;
+  margin-bottom: 3px;
+}
+.feels-like-description {
+  font-size: 16px;
+  margin-left: 58px;
+  color: #000;
+  font-style: italic;
+}
+.current-conditions {
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.current-weather-icon {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  padding: 5px 0 10px 0;
+}
+.current-weather-description {
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
+.future-weather-icon {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100px;
+  padding: 0 10px 5px;
+}
+.future-weather {
+  padding: 5px 16px 0;
+}
+.future-temp,
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.8em;
+  margin-bottom: 5px;
+}
+.future-temp {
+  font-size: 16px;
+}
+.future-low-temp {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 200;
+  font-size: smaller;
+}
+.weekday {
+  font-size: 14px;
+}
+.search-btn,
+.current-btn {
+  width: 100px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+.current-btn {
+  color: #fff;
+}
+.current-btn:hover {
+  color: #fff;
+}
+.current-btn:focus {
+  color: #fff;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+.search-btn-area {
+  padding: 0;
+  margin: 0px;
+}
+.search-bar {
+  padding-right: 8px;
+}
+.temp-unit {
+  position: relative;
+  top: -25px;
+  left: 10px;
+  font-size: 30px;
+}
+.unit {
+  text-decoration: none;
+  color: #000;
+}
+.unit:focus {
+  color: #0d6efd;
+}
+.unit:hover {
+  color: #0b5ed7;
+}
+.weekday {
+  font-weight: 400;
+}
