@@ -129,3 +129,7 @@ input.city {
 .weekday {
   font-weight: 400;
 }
+.github-link {
+  margin-top: 15px;
+  font-size: 12px;
+}
