@@ -24,7 +24,7 @@ function showCurrentConditions(response) {
   if (response.data.weather[0].icon === "01d") {
     currentWeatherIcon.setAttribute("src", "images/sun.png");
   } else if (response.data.weather[0].icon === "01n") {
-    currentWeatherIcon.setAttribute("src", "images/sun.png");
+    currentWeatherIcon.setAttribute("src", "images/clear-evening.png");
   } else if (response.data.weather[0].icon === "02d") {
     currentWeatherIcon.setAttribute("src", "images/partly-cloudy.png");
   } else if (response.data.weather[0].icon === "02n") {
@@ -33,7 +33,7 @@ function showCurrentConditions(response) {
     response.data.weather[0].icon === "03d" ||
     response.data.weather[0].icon === "03n"
   ) {
-    currentWeatherIcon.setAttribute("src", "images/cloudy.png");
+    currentWeatherIcon.setAttribute("src", "images/some-clouds.png");
   } else if (
     response.data.weather[0].icon === "04d" ||
     response.data.weather[0].icon === "04n"
@@ -44,11 +44,10 @@ function showCurrentConditions(response) {
     response.data.weather[0].icon === "09n"
   ) {
     currentWeatherIcon.setAttribute("src", "images/rain.png");
-  } else if (
-    response.data.weather[0].icon === "10d" ||
-    response.data.weather[0].icon === "10n"
-  ) {
+  } else if (response.data.weather[0].icon === "10d") {
     currentWeatherIcon.setAttribute("src", "images/sun-showers.png");
+  } else if (response.data.weather[0].icon === "10n") {
+    currentWeatherIcon.setAttribute("src", "images/evening-showers.png");
   } else if (
     response.data.weather[0].icon === "11d" ||
     response.data.weather[0].icon === "11n"
