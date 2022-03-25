@@ -136,11 +136,11 @@ function showDate() {
 
   let month = months[now.getMonth()];
   let date = now.getDate();
-  let year = now.getFullYear();
+  //let year = now.getFullYear();
   let newFormattedTime = formatAMPM(new Date());
 
   let currentDate = document.querySelector(".current-date");
-  currentDate.innerHTML = `<em>${day}, ${month} ${date}, ${year} - ${newFormattedTime}</em>`;
+  currentDate.innerHTML = `<small>Last Updated:</small><br /> <em>${day}, ${month} ${date} - ${newFormattedTime}</em>`;
 }
 
 //change temp units

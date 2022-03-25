@@ -22,12 +22,15 @@ input.city {
   font-size: 50px;
   font-weight: 700;
   color: #000;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 .current-date {
   color: rgba(0, 0, 0, 0.6);
   font-size: 18px;
   font-weight: 400;
+}
+.current-date small {
+  font-size: 12px;
 }
 .current-temp {
   color: #000;
@@ -37,12 +40,6 @@ input.city {
   margin-left: 50px;
   margin-bottom: 0px;
   padding-bottom: 0px;
-}
-.feels-like-description {
-  font-size: 16px;
-  margin-left: 58px;
-  color: #000;
-  font-style: italic;
 }
 .current-conditions {
   color: rgba(0, 0, 0, 0.6);
