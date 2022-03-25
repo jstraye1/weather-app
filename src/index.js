@@ -1,25 +1,5 @@
 //current city name
-function showCurrentConditions(response) {
-  showDate();
-  let currentTemp = Math.round(response.data.main.temp);
-  let actualTemp = document.querySelector("#actual-temp");
-  actualTemp.innerHTML = currentTemp;
-  let currentFeelsLike = Math.round(response.data.main.feels_like);
-  let feelsLike = document.querySelector("#feels-like");
-  feelsLike.innerHTML = currentFeelsLike;
-  let currentHumidity = Math.round(response.data.main.humidity);
-  let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = currentHumidity;
-  let currentWindSpeed = Math.round(response.data.wind.speed);
-  let windSpeed = document.querySelector("#wind-speed");
-  windSpeed.innerHTML = currentWindSpeed;
-  let currentWeatherDescription = response.data.weather[0].description;
-  let weatherDescription = document.querySelector(
-    ".current-weather-description"
-  );
-  weatherDescription.innerHTML = currentWeatherDescription;
-  let cityDisplayed = document.querySelector(".current-city");
-  cityDisplayed.innerHTML = response.data.name;
+function getWeatherIcon(response) {
   let currentWeatherIcon = document.querySelector("#current-weather-icon");
   if (response.data.weather[0].icon === "01d") {
     currentWeatherIcon.setAttribute("src", "images/sun.png");
@@ -65,6 +45,31 @@ function showCurrentConditions(response) {
     );
   }
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
+}
+
+function showCurrentConditions(response) {
+  console.log(response.data);
+  showDate();
+  getWeatherIcon(response);
+  let currentTemp = Math.round(response.data.main.temp);
+  let actualTemp = document.querySelector("#actual-temp");
+  actualTemp.innerHTML = currentTemp;
+  let currentFeelsLike = Math.round(response.data.main.feels_like);
+  let feelsLike = document.querySelector("#feels-like");
+  feelsLike.innerHTML = currentFeelsLike;
+  let currentHumidity = Math.round(response.data.main.humidity);
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = currentHumidity;
+  let currentWindSpeed = Math.round(response.data.wind.speed);
+  let windSpeed = document.querySelector("#wind-speed");
+  windSpeed.innerHTML = currentWindSpeed;
+  let currentWeatherDescription = response.data.weather[0].description;
+  let weatherDescription = document.querySelector(
+    ".current-weather-description"
+  );
+  weatherDescription.innerHTML = currentWeatherDescription;
+  let cityDisplayed = document.querySelector(".current-city");
+  cityDisplayed.innerHTML = response.data.name;
 }
 
 function getCity(event) {
