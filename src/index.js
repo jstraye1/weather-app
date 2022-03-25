@@ -13,13 +13,59 @@ function showCurrentConditions(response) {
   let currentWindSpeed = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector("#wind-speed");
   windSpeed.innerHTML = currentWindSpeed;
-  let currentWeatherDescription = response.data.weather[0].main;
+  let currentWeatherDescription = response.data.weather[0].description;
   let weatherDescription = document.querySelector(
     ".current-weather-description"
   );
   weatherDescription.innerHTML = currentWeatherDescription;
   let cityDisplayed = document.querySelector(".current-city");
   cityDisplayed.innerHTML = response.data.name;
+  let currentWeatherIcon = document.querySelector("#current-weather-icon");
+  if (response.data.weather[0].icon === "01d") {
+    currentWeatherIcon.setAttribute("src", "images/sun.png");
+  } else if (response.data.weather[0].icon === "01n") {
+    currentWeatherIcon.setAttribute("src", "images/sun.png");
+  } else if (response.data.weather[0].icon === "02d") {
+    currentWeatherIcon.setAttribute("src", "images/partly-cloudy.png");
+  } else if (response.data.weather[0].icon === "02n") {
+    currentWeatherIcon.setAttribute("src", "images/partly-cloudy-evening.png");
+  } else if (
+    response.data.weather[0].icon === "03d" ||
+    response.data.weather[0].icon === "03n"
+  ) {
+    currentWeatherIcon.setAttribute("src", "images/cloudy.png");
+  } else if (
+    response.data.weather[0].icon === "04d" ||
+    response.data.weather[0].icon === "04n"
+  ) {
+    currentWeatherIcon.setAttribute("src", "images/cloudy.png");
+  } else if (
+    response.data.weather[0].icon === "09d" ||
+    response.data.weather[0].icon === "09n"
+  ) {
+    currentWeatherIcon.setAttribute("src", "images/rain.png");
+  } else if (
+    response.data.weather[0].icon === "10d" ||
+    response.data.weather[0].icon === "10n"
+  ) {
+    currentWeatherIcon.setAttribute("src", "images/sun-showers.png");
+  } else if (
+    response.data.weather[0].icon === "11d" ||
+    response.data.weather[0].icon === "11n"
+  ) {
+    currentWeatherIcon.setAttribute("src", "images/storms.png");
+  } else if (
+    response.data.weather[0].icon === "13d" ||
+    response.data.weather[0].icon === "13n"
+  ) {
+    currentWeatherIcon.setAttribute("src", "images/snow.png");
+  } else {
+    currentWeatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  }
+  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function getCity(event) {
@@ -27,17 +73,8 @@ function getCity(event) {
   let apiKey = "bb7f974b24025ddf5b2576a2a8e204ca";
   let units = "imperial";
   let citySearched = document.querySelector("#city-search");
-  //let cityDisplayed = document.querySelector(".current-city");
   let weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched.value}&units=${units}&appid=${apiKey}`;
   axios.get(weatherApi).then(showCurrentConditions);
-  // if (citySearched.value.length > 0) {
-  // cityDisplayed.innerHTML = `${citySearched.value.replace(
-  //    /(^\w{1})|(\s+\w{1})/g,
-  //    (letter) => letter.toUpperCase()
-  //  )}`;
-  //} else {
-  //cityDisplayed.innerHTML = "<small>Please enter a city</small>";
-  //}
 }
 
 function showCurrentLocation(position) {

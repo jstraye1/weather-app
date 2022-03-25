@@ -58,6 +58,7 @@ input.city {
   text-align: center;
   padding-top: 10px;
   margin-bottom: 5px;
+  text-transform: capitalize;
 }
 .future-weather-icon {
   display: block;
