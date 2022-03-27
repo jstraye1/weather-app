@@ -48,7 +48,6 @@ function getWeatherIcon(response) {
 }
 
 function showCurrentConditions(response) {
-  console.log(response.data);
   showDate();
   getWeatherIcon(response);
 
