@@ -51,23 +51,27 @@ function showCurrentConditions(response) {
   console.log(response.data);
   showDate();
   getWeatherIcon(response);
-  let currentTemp = Math.round(response.data.main.temp);
+
+  fahrenheitTemperature = Math.round(response.data.main.temp);
   let actualTemp = document.querySelector("#actual-temp");
-  actualTemp.innerHTML = currentTemp;
-  let currentFeelsLike = Math.round(response.data.main.feels_like);
+  actualTemp.innerHTML = fahrenheitTemperature;
+
+  feelsLikeTemperature = Math.round(response.data.main.feels_like);
   let feelsLike = document.querySelector("#feels-like");
-  feelsLike.innerHTML = currentFeelsLike;
-  let currentHumidity = Math.round(response.data.main.humidity);
+  feelsLike.innerHTML = feelsLikeTemperature;
+
   let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = currentHumidity;
-  let currentWindSpeed = Math.round(response.data.wind.speed);
-  let windSpeed = document.querySelector("#wind-speed");
-  windSpeed.innerHTML = currentWindSpeed;
-  let currentWeatherDescription = response.data.weather[0].description;
+  humidity.innerHTML = Math.round(response.data.main.humidity);
+
+  windSpeed = Math.round(response.data.wind.speed);
+  let currentWindSpeed = document.querySelector("#wind-speed");
+  currentWindSpeed.innerHTML = windSpeed;
+
   let weatherDescription = document.querySelector(
     ".current-weather-description"
   );
-  weatherDescription.innerHTML = currentWeatherDescription;
+  weatherDescription.innerHTML = response.data.weather[0].description;
+
   let cityDisplayed = document.querySelector(".current-city");
   cityDisplayed.innerHTML = response.data.name;
 }
@@ -146,36 +150,35 @@ function showDate() {
 //change temp units
 function tempInCelcius(event) {
   event.preventDefault();
+  celcius.classList.add("active");
+  fahrenheit.classList.remove("active");
   let actualTemp = document.querySelector("#actual-temp");
-  actualTemp.innerHTML = 13;
-  let futureTemp1 = document.querySelector("#temp-1");
-  futureTemp1.innerHTML = `13&#176;C <span class="future-low-temp">/2&#176;C</span>`;
-  let futureTemp2 = document.querySelector("#temp-2");
-  futureTemp2.innerHTML = `13&#176;C <span class="future-low-temp">/2&#176;C</span>`;
-  let futureTemp3 = document.querySelector("#temp-3");
-  futureTemp3.innerHTML = `13&#176;C <span class="future-low-temp">/2&#176;C</span>`;
-  let futureTemp4 = document.querySelector("#temp-4");
-  futureTemp4.innerHTML = `13&#176;C <span class="future-low-temp">/2&#176;C</span>`;
-  let futureTemp5 = document.querySelector("#temp-5");
-  futureTemp5.innerHTML = `13&#176;C <span class="future-low-temp">/2&#176;C</span>`;
+  let celciusTemperature = ((fahrenheitTemperature - 32) * 5) / 9;
+  actualTemp.innerHTML = Math.round(celciusTemperature);
+  let celciusFeelsLike = ((feelsLikeTemperature - 32) * 5) / 9;
+  let feelsLikeUnits = document.querySelector("#feels-like-units");
+  feelsLikeUnits.innerHTML = ` ${Math.round(celciusFeelsLike)}°C`;
+  let kilometers = windSpeed * 1.609;
+  let currentWindSpeedUnits = document.querySelector("#wind-speed-units");
+  currentWindSpeedUnits.innerHTML = ` ${Math.round(kilometers)} km/h`;
 }
 function tempInFahrenheit(event) {
   event.preventDefault();
+  celcius.classList.remove("active");
+  fahrenheit.classList.add("active");
   let actualTemp = document.querySelector("#actual-temp");
-  actualTemp.innerHTML = 55;
-  let futureTemp1 = document.querySelector("#temp-1");
-  futureTemp1.innerHTML = `55&#176;F <span class="future-low-temp">/35&#176;F</span>`;
-  let futureTemp2 = document.querySelector("#temp-2");
-  futureTemp2.innerHTML = `55&#176;F <span class="future-low-temp">/35&#176;F</span>`;
-  let futureTemp3 = document.querySelector("#temp-3");
-  futureTemp3.innerHTML = `55&#176;F <span class="future-low-temp">/35&#176;F</span>`;
-  let futureTemp4 = document.querySelector("#temp-4");
-  futureTemp4.innerHTML = `55&#176;F <span class="future-low-temp">/35&#176;F</span>`;
-  let futureTemp5 = document.querySelector("#temp-5");
-  futureTemp5.innerHTML = `55&#176;F <span class="future-low-temp">/35&#176;F</span>`;
+  actualTemp.innerHTML = Math.round(fahrenheitTemperature);
+  let feelsLikeUnits = document.querySelector("#feels-like-units");
+  feelsLikeUnits.innerHTML = ` ${feelsLikeTemperature}°F`;
+  let currentWindSpeedUnits = document.querySelector("#wind-speed-units");
+  currentWindSpeedUnits.innerHTML = ` ${windSpeed} mph`;
 }
 
 // on page load
+let fahrenheitTemperature = null;
+let feelsLikeTemperature = null;
+let windSpeed = null;
+
 showDate();
 let apiKey = "bb7f974b24025ddf5b2576a2a8e204ca";
 let units = "imperial";

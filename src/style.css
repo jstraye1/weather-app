@@ -15,6 +15,12 @@ input.city {
 .current-row {
   margin: 0 20px;
 }
+@media only screen and (max-width: 575px) {
+  .current-row {
+    margin: 0;
+    padding: 0;
+  }
+}
 .city-entry {
   border: 1px solid #aaa;
 }
@@ -46,17 +52,37 @@ input.city {
   margin-bottom: 5px;
   font-size: 14px;
 }
+.current-weather-description {
+  margin-left: 55px;
+  padding-top: 0px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
 .current-weather-icon {
   display: block;
   margin: 0 auto;
   width: 100%;
   padding: 5px 0 10px 0;
 }
-.current-weather-description {
-  margin-left: 55px;
-  padding-top: 0px;
-  margin-bottom: 10px;
-  text-transform: capitalize;
+@media only screen and (max-width: 575px) {
+  .current-city {
+    font-size: 45px;
+  }
+  .current-date {
+    font-size: 16px;
+  }
+  .current-temp {
+    margin: 0;
+    text-align: center;
+  }
+  .current-weather-description {
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+  .current-weather-icon {
+    padding: 10px;
+    padding-bottom: 20px;
+  }
 }
 .future-weather-icon {
   display: block;
@@ -88,7 +114,7 @@ input.city {
 }
 .search-btn,
 .current-btn {
-  width: 100px;
+  width: 105px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
 }
@@ -106,6 +132,13 @@ input.city {
   padding: 0;
   margin: 0px;
 }
+@media only screen and (max-width: 575px) {
+  .search-btn-area {
+    padding: 0;
+    margin: 0px;
+    padding-left: 12px;
+  }
+}
 .search-bar {
   padding-right: 8px;
 }
@@ -116,15 +149,22 @@ input.city {
   font-size: 30px;
 }
 .unit {
-  text-decoration: none;
-  color: #000;
-}
-.unit:focus {
   color: #0d6efd;
+  text-decoration: none;
 }
 .unit:hover {
   color: #0b5ed7;
 }
+.active {
+  text-decoration: none;
+  color: #000;
+  cursor: default;
+}
+.active:hover {
+  color: #000;
+  cursor: default;
+}
+
 .weekday {
   font-weight: 400;
 }
