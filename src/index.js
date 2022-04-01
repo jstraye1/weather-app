@@ -173,10 +173,40 @@ function tempInFahrenheit(event) {
   currentWindSpeedUnits.innerHTML = ` ${windSpeed} mph`;
 }
 
+function displayForcast() {
+  let forcastElement = document.querySelector("#forcast");
+
+  let forecastHTML = `<div class="row justify-content-evenly">`;
+  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+  <div class="col-sm-2">
+    <img
+      src="images/rain.png"
+      alt="rain"
+      class="future-weather-icon"
+    />
+    <p class="future-temp">
+      <span class="future-high-temp"> 55°F</span>
+      <span class="future-low-temp">/35°F</span>
+      <br />
+      <span class="weekday">${day}</span>
+    </p>
+  </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+
+  forcastElement.innerHTML = forecastHTML;
+}
+
 // on page load
 let fahrenheitTemperature = null;
 let feelsLikeTemperature = null;
 let windSpeed = null;
+
+displayForcast();
 
 showDate();
 let apiKey = "bb7f974b24025ddf5b2576a2a8e204ca";
