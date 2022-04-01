@@ -47,29 +47,51 @@ function getWeatherIcon(response) {
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
+function formatWeekday(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
+}
+
 function displayForcast(response) {
   console.log(response.data.daily);
+  let forcast = response.data.daily;
   let forcastElement = document.querySelector("#forcast");
 
   let forecastHTML = `<div class="row justify-content-evenly">`;
-  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forcast.forEach(function (forcastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
   <div class="col-sm-2">
     <img
-      src="images/rain.png"
+      src="http://openweathermap.org/img/wn/${
+        forcastDay.weather[0].icon
+      }@2x.png"
       alt="rain"
       class="future-weather-icon"
+      id="future-weather-icon"
     />
     <p class="future-temp">
-      <span class="future-high-temp"> 55°F</span>
-      <span class="future-low-temp">/35°F</span>
+      <span class="future-high-temp"> ${Math.round(
+        forcastDay.temp.max
+      )}°F</span>
+      <span class="future-low-temp">/${Math.round(forcastDay.temp.min)}°F</span>
       <br />
-      <span class="weekday">${day}</span>
+      <span class="weekday">${formatWeekday(forcastDay.dt)}</span>
     </p>
   </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
 
