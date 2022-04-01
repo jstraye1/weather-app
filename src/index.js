@@ -47,6 +47,41 @@ function getWeatherIcon(response) {
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
+function displayForcast(response) {
+  console.log(response.data.daily);
+  let forcastElement = document.querySelector("#forcast");
+
+  let forecastHTML = `<div class="row justify-content-evenly">`;
+  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+  <div class="col-sm-2">
+    <img
+      src="images/rain.png"
+      alt="rain"
+      class="future-weather-icon"
+    />
+    <p class="future-temp">
+      <span class="future-high-temp"> 55°F</span>
+      <span class="future-low-temp">/35°F</span>
+      <br />
+      <span class="weekday">${day}</span>
+    </p>
+  </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+
+  forcastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "bb7f974b24025ddf5b2576a2a8e204ca";
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  axios.get(apiURL).then(displayForcast);
+}
+
 function showCurrentConditions(response) {
   showDate();
   getWeatherIcon(response);
@@ -73,6 +108,8 @@ function showCurrentConditions(response) {
 
   let cityDisplayed = document.querySelector(".current-city");
   cityDisplayed.innerHTML = response.data.name;
+
+  getForecast(response.data.coord);
 }
 
 function getCity(event) {
@@ -173,40 +210,10 @@ function tempInFahrenheit(event) {
   currentWindSpeedUnits.innerHTML = ` ${windSpeed} mph`;
 }
 
-function displayForcast() {
-  let forcastElement = document.querySelector("#forcast");
-
-  let forecastHTML = `<div class="row justify-content-evenly">`;
-  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-  <div class="col-sm-2">
-    <img
-      src="images/rain.png"
-      alt="rain"
-      class="future-weather-icon"
-    />
-    <p class="future-temp">
-      <span class="future-high-temp"> 55°F</span>
-      <span class="future-low-temp">/35°F</span>
-      <br />
-      <span class="weekday">${day}</span>
-    </p>
-  </div>`;
-  });
-  forecastHTML = forecastHTML + `</div>`;
-
-  forcastElement.innerHTML = forecastHTML;
-}
-
 // on page load
 let fahrenheitTemperature = null;
 let feelsLikeTemperature = null;
 let windSpeed = null;
-
-displayForcast();
 
 showDate();
 let apiKey = "bb7f974b24025ddf5b2576a2a8e204ca";
