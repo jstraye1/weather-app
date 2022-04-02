@@ -14,7 +14,6 @@ function formatWeekday(timestamp) {
 }
 
 function displayForcast(response) {
-  console.log(response.data.daily);
   let forcast = response.data.daily;
   let forcastElement = document.querySelector("#forcast");
 
@@ -55,7 +54,6 @@ function getForecast(coordinates) {
 
 function showCurrentConditions(response) {
   showDate();
-  //getWeatherIcon(response);
   let currentWeatherIcon = document.querySelector("#current-weather-icon");
   currentWeatherIcon.setAttribute(
     "src",
@@ -154,7 +152,6 @@ function showDate() {
 
   let month = months[now.getMonth()];
   let date = now.getDate();
-  //let year = now.getFullYear();
   let newFormattedTime = formatAMPM(new Date());
 
   let currentDate = document.querySelector(".current-date");
