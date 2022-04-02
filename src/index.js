@@ -1,52 +1,3 @@
-//current city name
-function getWeatherIcon(response) {
-  let currentWeatherIcon = document.querySelector("#current-weather-icon");
-  if (response.data.weather[0].icon === "01d") {
-    currentWeatherIcon.setAttribute("src", "images/sun.png");
-  } else if (response.data.weather[0].icon === "01n") {
-    currentWeatherIcon.setAttribute("src", "images/clear-evening.png");
-  } else if (response.data.weather[0].icon === "02d") {
-    currentWeatherIcon.setAttribute("src", "images/partly-cloudy.png");
-  } else if (response.data.weather[0].icon === "02n") {
-    currentWeatherIcon.setAttribute("src", "images/partly-cloudy-evening.png");
-  } else if (
-    response.data.weather[0].icon === "03d" ||
-    response.data.weather[0].icon === "03n"
-  ) {
-    currentWeatherIcon.setAttribute("src", "images/some-clouds.png");
-  } else if (
-    response.data.weather[0].icon === "04d" ||
-    response.data.weather[0].icon === "04n"
-  ) {
-    currentWeatherIcon.setAttribute("src", "images/cloudy.png");
-  } else if (
-    response.data.weather[0].icon === "09d" ||
-    response.data.weather[0].icon === "09n"
-  ) {
-    currentWeatherIcon.setAttribute("src", "images/rain.png");
-  } else if (response.data.weather[0].icon === "10d") {
-    currentWeatherIcon.setAttribute("src", "images/sun-showers.png");
-  } else if (response.data.weather[0].icon === "10n") {
-    currentWeatherIcon.setAttribute("src", "images/evening-showers.png");
-  } else if (
-    response.data.weather[0].icon === "11d" ||
-    response.data.weather[0].icon === "11n"
-  ) {
-    currentWeatherIcon.setAttribute("src", "images/storms.png");
-  } else if (
-    response.data.weather[0].icon === "13d" ||
-    response.data.weather[0].icon === "13n"
-  ) {
-    currentWeatherIcon.setAttribute("src", "images/snow.png");
-  } else {
-    currentWeatherIcon.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-  }
-  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
-}
-
 function formatWeekday(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -69,16 +20,14 @@ function displayForcast(response) {
 
   let forecastHTML = `<div class="row justify-content-evenly">`;
   forcast.forEach(function (forcastDay, index) {
-    if (index < 5) {
+    if (index > 0 && index < 6) {
       forecastHTML =
         forecastHTML +
         `
-  <div class="col-sm-2">
+  <div class="col-sm-2 forcast-col">
     <img
-      src="http://openweathermap.org/img/wn/${
-        forcastDay.weather[0].icon
-      }@2x.png"
-      alt="rain"
+      src="images/${forcastDay.weather[0].icon}.png"
+      alt="${forcastDay.weather[0].description}"
       class="future-weather-icon"
       id="future-weather-icon"
     />
@@ -106,7 +55,13 @@ function getForecast(coordinates) {
 
 function showCurrentConditions(response) {
   showDate();
-  getWeatherIcon(response);
+  //getWeatherIcon(response);
+  let currentWeatherIcon = document.querySelector("#current-weather-icon");
+  currentWeatherIcon.setAttribute(
+    "src",
+    `images/${response.data.weather[0].icon}.png`
+  );
+  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let actualTemp = document.querySelector("#actual-temp");
@@ -141,6 +96,7 @@ function getCity(event) {
   let citySearched = document.querySelector("#city-search");
   let weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched.value}&units=${units}&appid=${apiKey}`;
   axios.get(weatherApi).then(showCurrentConditions);
+  document.querySelector("#city-search-form").reset();
 }
 
 function showCurrentLocation(position) {

@@ -89,10 +89,10 @@ input.city {
   margin: 0 auto;
   width: 100%;
   max-width: 100px;
-  padding: 0 10px 5px;
+  padding: 5px 10px;
 }
 .future-weather {
-  padding: 5px 16px 0;
+  padding: 0 16px;
 }
 .future-temp,
 .weekday {
@@ -171,4 +171,8 @@ input.city {
 .github-link {
   margin-top: 15px;
   font-size: 12px;
+}
+
+.forcast-col:hover {
+  background: rgba(250, 207, 106, 0.3);
 }
