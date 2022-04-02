@@ -68,6 +68,8 @@ function showCurrentConditions(response) {
   feelsLikeTemperature = Math.round(response.data.main.feels_like);
   let feelsLike = document.querySelector("#feels-like");
   feelsLike.innerHTML = feelsLikeTemperature;
+  let feelsLikeUnits = document.querySelector("#feels-like-units");
+  feelsLikeUnits.innerHTML = `°F`;
 
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = Math.round(response.data.main.humidity);
@@ -75,6 +77,8 @@ function showCurrentConditions(response) {
   windSpeed = Math.round(response.data.wind.speed);
   let currentWindSpeed = document.querySelector("#wind-speed");
   currentWindSpeed.innerHTML = windSpeed;
+  let currentWindSpeedUnits = document.querySelector("#wind-speed-units");
+  currentWindSpeedUnits.innerHTML = ` mph`;
 
   let weatherDescription = document.querySelector(
     ".current-weather-description"
@@ -85,6 +89,8 @@ function showCurrentConditions(response) {
   cityDisplayed.innerHTML = response.data.name;
 
   getForecast(response.data.coord);
+  celcius.classList.remove("active");
+  fahrenheit.classList.add("active");
 }
 
 function getCity(event) {
@@ -163,15 +169,24 @@ function tempInCelcius(event) {
   event.preventDefault();
   celcius.classList.add("active");
   fahrenheit.classList.remove("active");
+
   let actualTemp = document.querySelector("#actual-temp");
   let celciusTemperature = ((fahrenheitTemperature - 32) * 5) / 9;
   actualTemp.innerHTML = Math.round(celciusTemperature);
+
+  let celciusFeelsLikeHTML = document.querySelector("#feels-like");
   let celciusFeelsLike = ((feelsLikeTemperature - 32) * 5) / 9;
+  celciusFeelsLikeHTML.innerHTML = ` ${Math.round(celciusFeelsLike)}`;
+
   let feelsLikeUnits = document.querySelector("#feels-like-units");
-  feelsLikeUnits.innerHTML = ` ${Math.round(celciusFeelsLike)}°C`;
+  feelsLikeUnits.innerHTML = `°C`;
+
+  let currentWindSpeedMetric = document.querySelector("#wind-speed");
   let kilometers = windSpeed * 1.609;
+  currentWindSpeedMetric.innerHTML = ` ${Math.round(kilometers)}`;
+
   let currentWindSpeedUnits = document.querySelector("#wind-speed-units");
-  currentWindSpeedUnits.innerHTML = ` ${Math.round(kilometers)} km/h`;
+  currentWindSpeedUnits.innerHTML = ` km/h`;
 }
 function tempInFahrenheit(event) {
   event.preventDefault();
@@ -179,10 +194,14 @@ function tempInFahrenheit(event) {
   fahrenheit.classList.add("active");
   let actualTemp = document.querySelector("#actual-temp");
   actualTemp.innerHTML = Math.round(fahrenheitTemperature);
+  let fahrenheitFeelsLikeHTML = document.querySelector("#feels-like");
+  fahrenheitFeelsLikeHTML.innerHTML = ` ${feelsLikeTemperature}`;
   let feelsLikeUnits = document.querySelector("#feels-like-units");
-  feelsLikeUnits.innerHTML = ` ${feelsLikeTemperature}°F`;
+  feelsLikeUnits.innerHTML = `°F`;
+  let currentWindSpeedImperial = document.querySelector("#wind-speed");
+  currentWindSpeedImperial.innerHTML = ` ${windSpeed}`;
   let currentWindSpeedUnits = document.querySelector("#wind-speed-units");
-  currentWindSpeedUnits.innerHTML = ` ${windSpeed} mph`;
+  currentWindSpeedUnits.innerHTML = ` mph`;
 }
 
 // on page load
